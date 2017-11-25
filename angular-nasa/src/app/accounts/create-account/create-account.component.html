@@ -1,0 +1,20 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+        <div class="form-group" >
+            <label for="username">Username</label>
+            <input type="text" #username id="username" name ="username" required />
+           
+        </div>
+     
+            <label for="password">Password</label>
+            <input type="password" #password id="password" name="password" required />
+           
+        
+            <button (click)="onClick(username.value, password.value)" class="btn btn-primary">Login</button>
+        
+   
+</div>
+<p>
+  {{response}}
+</p>
+
