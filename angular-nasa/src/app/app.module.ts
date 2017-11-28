@@ -4,21 +4,25 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CreateAccountComponent } from './accounts/create-account/create-account.component';
-import {CreateAccountService} from './create-account.service'
-
+import {CreateAccountService} from './create-account.service';
+import { LoginComponent } from './accounts/login/login.component';
+import { AppRoutingModule } from './/app-routing.module'
+import { LoginService } from './login.service'
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateAccountComponent,
+    LoginComponent,
     
    
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [CreateAccountService],
+  providers: [CreateAccountService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
