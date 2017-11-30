@@ -13,8 +13,8 @@ import { HomeService } from './services/home.service';
 import { AuthDashboardComponent } from './auth-dashboard/auth-dashboard.component';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
 import { CreateCollectionService } from './services/create-collection.service'
-
-
+import { AuthGuard } from './guards/auth.guard'
+import { LoginGuard } from './guards/login.guard'
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +29,7 @@ import { CreateCollectionService } from './services/create-collection.service'
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService],
+  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService, AuthGuard, LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
