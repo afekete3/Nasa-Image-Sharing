@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from '../../login.service'
+import {  Router } from '@angular/router';
+import {LoginService} from '../../services/login.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
 
    response = '';
   
-  constructor(private _loginService: LoginService) { }
+  constructor(private _loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -25,6 +26,10 @@ export class LoginComponent implements OnInit {
    * Therefore a callback function is required to get back the response.
    */
   onResponse(res: string) {
-    this.response = res;
+    if (res['message'] == "valid password"){
+      localStorage.setItem('user', res['username'])
+      this.router.navigate(['createcollection']);
+    }
+    this.response = res['message'];
   }
 }

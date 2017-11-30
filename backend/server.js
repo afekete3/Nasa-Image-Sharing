@@ -1,7 +1,8 @@
 var Account    = require('./app/models/account');
+var Collection = require('./app/models/collection')
 var mongoose   = require('mongoose');
 var nev = require('email-verification')(mongoose);2 
-mongoose.connect('mongodb://localhost:27017/accounts', {
+mongoose.connect('mongodb://localhost:27017/accounts1', {
   useMongoClient: true,
 });
 
@@ -72,18 +73,47 @@ router.route('/login')
         console.log("in the login validation");
         Account.find({'username':req.body.username}, function(err, account){
             if(err){
-                res.send(err); 
+               res.send(err);
             }
-            var valid = bcrypt.compareSync(req.body.password, account[0]['password']);
-            console.log(valid); 
-            if(valid){
-                res.json({message: 'valid password'}); 
-            }else{
-                res.json({message: 'invalid password'}); 
+            if(account[0] == null){
+                 res.json({message: 'invalid username or password'}) 
+            }
+            else{
+                console.log(account);
+                 console.log('account');
+                var valid = bcrypt.compareSync(req.body.password, account[0]['password']);
+                if(valid){
+                    res.json({message: 'valid password', username: req.body.username}); 
+                }else{
+                    res.json({message: 'invalid username or password'}); 
+                }
             }
         });
+       
     });
-
+router.route('/createcollection')
+    .post(function(req,res){
+        console.log('in create collection');
+        console.log(req.body.username);
+        Collection.find({'username':req.body.username,'name': req.body.name }, function(err, account){
+            if(err){
+               res.send(err);
+            } 
+             if(account[0] != null){
+                 res.json({message: 'name already used please select another one'}) 
+            }
+            else{
+                var collection = new Collection();
+                collection.username = req.body.username;
+                collection.name = req.body.name;
+                collection.desc = req.body.description;
+                collection.save(function() {
+                console.log('saved account')
+                res.json({ message: 'collection created!' });
+                });
+            }
+        })
+    })
 
 app.use('/api', router);
 
