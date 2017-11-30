@@ -1,3 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <h1 style="text-align:center;">NASA IMAGE SHARING SITE</h1>
 <router-outlet></router-outlet>
+
+<p style="display:none">user={{user}}</p>
+<a (click)="logout()" href='login'*ngIf=user>logout</a>

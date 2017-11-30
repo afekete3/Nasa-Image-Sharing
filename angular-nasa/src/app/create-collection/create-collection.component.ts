@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateCollectionService } from '../services/create-collection.service'
+import {  Router } from '@angular/router';
 @Component({
   selector: 'app-create-collection',
   templateUrl: './create-collection.component.html',
@@ -7,7 +8,7 @@ import { CreateCollectionService } from '../services/create-collection.service'
 })
 export class CreateCollectionComponent implements OnInit {
   response= "";
-  constructor(private _createCollectionService: CreateCollectionService) { }
+  constructor(private _createCollectionService: CreateCollectionService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,7 +21,10 @@ export class CreateCollectionComponent implements OnInit {
    * Therefore a callback function is required to get back the response.
    */
   onCreateCollectionResponse(res: string) {
-  
+    if(res['message'] == 'collection created!'){
+      localStorage.setItem('editCollection', res['username'])
+      this.router.navigate(['editcollection']);
+    }
     this.response = res['message'];
   }
 }

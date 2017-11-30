@@ -9,12 +9,14 @@ import { AuthDashboardComponent } from './auth-dashboard/auth-dashboard.componen
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { EditCollectionComponent } from './edit-collection/edit-collection.component'
  const routes: Routes = [
    { path: 'login', component: LoginComponent , canActivate:[LoginGuard]},
    { path: 'createaccount', component: CreateAccountComponent, canActivate:[LoginGuard]},
    { path: 'home', component: HomeComponent},
    { path: 'authdashboard', component: AuthDashboardComponent, canActivate:[AuthGuard]},
    { path: 'createcollection', component: CreateCollectionComponent, canActivate:[AuthGuard]},
+   { path: 'editcollection', component: EditCollectionComponent},
 ];
 
 @NgModule({

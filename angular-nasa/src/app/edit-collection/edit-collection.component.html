@@ -1,0 +1,39 @@
+<head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"></head>
+<br />
+<div class="inner contact">
+                <!-- Form Area -->
+                <div class="contact-form">
+                    
+                        <!-- Left Inputs -->
+                        <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+                            <!-- Name -->
+                            <h4>Name of Collection: {{nameCollection}}</h4>
+                            <br> 
+                                <h4>Privacy Options </h4>
+                                <input type = "radio" name ="Private" value="private" [checked]="this.privacyCollection == false" 
+                                 (change)='newPrivacy()' style="padding:0px 10px 0px 10px;" >Private
+                                <input type = "radio" name ="Public" value="public" [checked]="this.privacyCollection == true"  
+                                (change)='newPrivacy()' style="padding:0px 10px 0px 10px;">Public
+
+                                <br><br>
+                             
+                         
+                        </div><!-- End Left Inputs -->
+                        <!-- Right Inputs -->
+                        <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
+                            <!-- Message -->
+                            <h4>Collection Description: </h4>
+                            <textarea name="description" id="description" #description value = {{descriptionCollection}} class="form textarea"  ></textarea>
+                        </div><!-- End Right Inputs -->
+                        <!-- Bottom Submit -->
+                        <div class="relative fullwidth col-xs-12">
+                            <!-- Send Button -->
+                            <button type="submit" id="submit" name="submit" (click)="updateCollection(description.value)" class="form-btn semibold">Save Changes</button> 
+                        </div><!-- End Bottom Submit -->
+                        <!-- Clear -->
+                        <div class="clear"></div>
+
+                </div><!-- End Contact Form Area -->
+            </div><!-- End Inner -->
+
+

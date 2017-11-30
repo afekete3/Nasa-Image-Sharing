@@ -38,10 +38,10 @@ router.get('/', function(req, res) {
 router.route('/create') 
 
    .post( function(req,res){
-       console.log(req.body)
+       console.log(req.body);
        var account1 = new Account();      // create a new instance of the Bear model
         if (validator.isEmail(req.body.username) == false){
-            console.log('bad email')
+            console.log('bad email');
              res.json({ message: 'Invalid Username! Please try again' });
         }
         else{
@@ -52,7 +52,7 @@ router.route('/create')
             // save the bear and check for errors
            
             account1.save(function() {
-            console.log('saved account')
+            console.log('saved account');
             res.json({ message: 'Account created!' });
             });
         }
@@ -67,7 +67,16 @@ router.route('/accounts')
             res.json(accounts);
         });
     });
-    
+router.route('/collections')
+    .get(function(req, res) {
+          console.log("getting all accounts");
+        Collection.find(function(err, collections) {
+            if (err){
+                res.send(err);
+            }   
+            res.json(collections);
+        });
+    });
 router.route('/login')
     .post(function(req, res){
         console.log("in the login validation");
@@ -95,27 +104,59 @@ router.route('/createcollection')
     .post(function(req,res){
         console.log('in create collection');
         console.log(req.body.username);
+        console.log(req.body.name);
         Collection.find({'username':req.body.username,'name': req.body.name }, function(err, account){
             if(err){
                res.send(err);
             } 
              if(account[0] != null){
-                 res.json({message: 'name already used please select another one'}) 
+                 res.json({message: 'name already used please select another one'});
             }
             else{
                 var collection = new Collection();
                 collection.username = req.body.username;
                 collection.name = req.body.name;
                 collection.desc = req.body.description;
+                collection.ispublic = false;
                 collection.save(function() {
-                console.log('saved account')
-                res.json({ message: 'collection created!' });
+                console.log('saved account');
+                res.json({ message: 'collection created!', username: req.body.name });
                 });
             }
-        })
-    })
+        });
+    });
+router.route('/collectiondata')
+    .post(function(req,res){
+         console.log(req.body.username);
+        console.log(req.body.collectionName);
+         Collection.find({'username':req.body.username,'name': req.body.collectionName }, function(err, collection){
+              if(err){
+               res.send(err);
+            } 
+            console.log(collection)
+            res.json(collection);
+             
+         });
+    });
+router.route('/collectionupdate')
+    .post(function(req,res){
+         Collection.find({'username':req.body.username,'name': req.body.collectionName }, function(err, collection){
+           if(err){
+               res.send(err);
+            } 
+            console.log(collection);
+            collection.desc = req.body.description;
+            collection.ispublic = req.body.privacy;
+            collection.save(function(err) {
+                 if (err)
+                    res.send(err);
 
+                console.log('saved account');
+                res.json(collection);
+                });
+         });
+    });
 app.use('/api', router);
 
 app.listen(port);
-console.log('Server is running on port ' + port)
+console.log('Server is running on port ' + port);

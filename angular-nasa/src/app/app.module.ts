@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { CreateAccountComponent } from './accounts/create-account/create-account.component';
 import {CreateAccountService} from './services/create-account.service';
@@ -14,7 +13,9 @@ import { AuthDashboardComponent } from './auth-dashboard/auth-dashboard.componen
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
 import { CreateCollectionService } from './services/create-collection.service'
 import { AuthGuard } from './guards/auth.guard'
-import { LoginGuard } from './guards/login.guard'
+import { LoginGuard } from './guards/login.guard';
+import { EditCollectionComponent } from './edit-collection/edit-collection.component'
+import { EditCollectionService } from './services/edit-collection.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,13 +24,14 @@ import { LoginGuard } from './guards/login.guard'
     HomeComponent,
     AuthDashboardComponent,
     CreateCollectionComponent,
+    EditCollectionComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService, AuthGuard, LoginGuard],
+  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService, AuthGuard, LoginGuard, EditCollectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
