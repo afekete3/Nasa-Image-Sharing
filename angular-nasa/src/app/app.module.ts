@@ -15,7 +15,9 @@ import { CreateCollectionService } from './services/create-collection.service'
 import { AuthGuard } from './guards/auth.guard'
 import { LoginGuard } from './guards/login.guard';
 import { EditCollectionComponent } from './edit-collection/edit-collection.component'
-import { EditCollectionService } from './services/edit-collection.service'
+import { EditCollectionService } from './services/edit-collection.service';
+import { MyCollectionsComponent } from './my-collections/my-collections.component'
+import { MyCollectionService } from './services/my-collection.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,13 +27,14 @@ import { EditCollectionService } from './services/edit-collection.service'
     AuthDashboardComponent,
     CreateCollectionComponent,
     EditCollectionComponent,
+    MyCollectionsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService, AuthGuard, LoginGuard, EditCollectionService],
+  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService, AuthGuard, LoginGuard, EditCollectionService, MyCollectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -137,25 +137,62 @@ router.route('/collectiondata')
             res.json(collection);
              
          });
-    });
+   
+    })
+    .put(function(req,res){
+        Collection.find({'username':req.body.username,'name': req.body.collectionName }, function(err, collection){
+           if(err){
+               res.send(err);
+            } 
+            var index = collection[0].Collection.indexOf(req.body.deleteImage);
+            if (index > -1) {
+                collection[0].Collection.splice(index, 1);
+            }
+           collection[0].save(function() {
+                console.log('saved account');
+                res.json(collection);
+                });
+            });
+        });
 router.route('/collectionupdate')
-    .post(function(req,res){
+    .put(function(req,res){
          Collection.find({'username':req.body.username,'name': req.body.collectionName }, function(err, collection){
            if(err){
                res.send(err);
             } 
             console.log(collection);
-            collection.desc = req.body.description;
-            collection.ispublic = req.body.privacy;
-            collection.save(function(err) {
-                 if (err)
-                    res.send(err);
-
-                console.log('saved account');
+            collection[0].desc = req.body.description;
+            collection[0].ispublic = req.body.privacy;
+            collection[0].Collection.push('https://images-assets.nasa.gov/image/PIA10556/PIA10556~thumb.jpg');
+            collection[0].save(function() {
+                console.log(collection);
                 res.json(collection);
                 });
          });
     });
+router.route('/getCollections')
+    .post(function(req,res){
+         Collection.find({'username':req.body.username}, function(err, collection){
+            res.json(collection); 
+         });
+    });
+router.route('/addtocollection')
+    .post(function(req,res){
+        console.log('in add to collection');
+          Collection.find({'username':req.body.user,'name': req.body.name }, function(err, collection){
+            if(err){
+               res.send(err);
+            } 
+              console.log(collection);
+            collection[0].Collection.push(req.body.img);
+            collection[0].save(function() {
+                console.log(collection);
+                res.json(collection);
+                });
+          });
+    })
+
+
 app.use('/api', router);
 
 app.listen(port);

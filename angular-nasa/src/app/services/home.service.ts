@@ -17,5 +17,14 @@ export class HomeService {
       });
      }
   }
-
+addtoCollection(username, img, collectionName){
+     this.http.post('/api/addtocollection', { 'user' : username, 'img' : img, 'name' : collectionName}).subscribe(data=>{
+        console.log(data); 
+     })
+ }
+ getCollections(callback_fun, username: string){
+      this.http.post('/api/getCollections', { 'username' : username }).subscribe(data=>{
+        callback_fun(data);
+     }); 
+ }
 }

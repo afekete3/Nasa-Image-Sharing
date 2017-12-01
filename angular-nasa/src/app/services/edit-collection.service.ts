@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class EditCollectionService {
-  body = {username: '', collectionName: '',description: "", privacy: false};
+  body = {username: '', collectionName: '',description: "", privacy: false, deleteImage: ""};
   constructor(private http: HttpClient) {
   }
   getCollectionData(callback_fun){
@@ -18,7 +18,15 @@ export class EditCollectionService {
   setCollectionData(callback_fun, description: string, privacy: boolean){
        this.body['description'] = description;
        this.body['privacy'] = privacy;
-        this.http.post('/api/collectionupdate',this.body ).subscribe(data => {
+        this.http.put('/api/collectionupdate',this.body ).subscribe(data => {
+        
+          callback_fun(data);
+      });
+  }
+   setImageCollectionData(callback_fun, link: string){
+       console.log('link');
+       this.body['deleteImage'] = link;
+        this.http.put('/api/collectiondata',this.body ).subscribe(data => {
         
           callback_fun(data);
       });

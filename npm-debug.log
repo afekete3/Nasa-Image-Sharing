@@ -1,0 +1,52 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/ubuntu/.nvm/versions/node/v6.11.2/bin/node',
+1 verbose cli   '/home/ubuntu/.nvm/versions/node/v6.11.2/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-D',
+1 verbose cli   '@types/' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.2
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData @types/
+8 silly fetchOtherPackageData @types/
+9 silly cache add args [ '@types/', null ]
+10 verbose cache add spec @types/
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: '@types/',
+11 silly cache add   scope: null,
+11 silly cache add   escapedName: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: '@types/',
+11 silly cache add   spec: '/home/ubuntu/workspace/@types',
+11 silly cache add   type: 'local' }
+12 error addLocal Could not install /home/ubuntu/workspace/@types
+13 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open '/home/ubuntu/workspace/@types'
+13 silly fetchPackageMetaData     at Error (native)
+13 silly fetchPackageMetaData  error for @types/ { Error: ENOENT: no such file or directory, open '/home/ubuntu/workspace/@types'
+13 silly fetchPackageMetaData     at Error (native)
+13 silly fetchPackageMetaData   errno: -2,
+13 silly fetchPackageMetaData   code: 'ENOENT',
+13 silly fetchPackageMetaData   syscall: 'open',
+13 silly fetchPackageMetaData   path: '/home/ubuntu/workspace/@types' }
+14 silly rollbackFailedOptional Starting
+15 silly rollbackFailedOptional Finishing
+16 silly runTopLevelLifecycles Finishing
+17 silly install printInstalled
+18 verbose stack Error: ENOENT: no such file or directory, open '/home/ubuntu/workspace/@types'
+18 verbose stack     at Error (native)
+19 verbose cwd /home/ubuntu/workspace
+20 error Linux 4.9.17-c9
+21 error argv "/home/ubuntu/.nvm/versions/node/v6.11.2/bin/node" "/home/ubuntu/.nvm/versions/node/v6.11.2/bin/npm" "install" "-D" "@types/"
+22 error node v6.11.2
+23 error npm  v3.10.10
+24 error path /home/ubuntu/workspace/@types
+25 error code ENOENT
+26 error errno -2
+27 error syscall open
+28 error enoent ENOENT: no such file or directory, open '/home/ubuntu/workspace/@types'
+29 error enoent ENOENT: no such file or directory, open '/home/ubuntu/workspace/@types'
+29 error enoent This is most likely not a problem with npm itself
+29 error enoent and is related to npm not being able to find a file.
+30 verbose exit [ -2, true ]

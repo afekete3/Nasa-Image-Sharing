@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation,ElementRef, ViewChild  } from '@angular/core';
 import { HomeService } from '../services/home.service';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,7 +8,11 @@ import { HomeService } from '../services/home.service';
 })
 export class HomeComponent implements OnInit {
   response = '';
-  photoCollection: string[] = new Array();
+  photoCollection = [];
+  collections = []; 
+  isCollection = false; 
+  res = ''; 
+
   @ViewChild('rankedCollections') rankedCollections: ElementRef;
    
   constructor(private _homeService: HomeService) {
@@ -18,21 +22,28 @@ export class HomeComponent implements OnInit {
     console.log('in constructor for home');
     
   }
-
-  ngOnInit() {
+ngOnInit() {
+    this._homeService.getCollections(this.loadCollections.bind(this), localStorage.getItem('user'));
+  }
+  
+  loadCollections(data){ 
+    for(var i = 0; i < data.length; i++){
+      this.collections.push(data[i]['name']); 
+      this.isCollection = true; 
+    }
+    console.log(this.collections); 
   }
    ShowImageCollection(){
     console.log('showing images');
   }
   SetCollectionList(){
      this.rankedCollections.nativeElement.innerHTML = "";
-    for (var i = 0; i < this.photoCollection.length ; i++){
-        console.log(this.photoCollection[i]);
-       this.rankedCollections.nativeElement.innerHTML += "<li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;' >"
-       + "<img style='height:400px; width: 400px' src ='" 
-       + this.photoCollection[i] + "'></li>" 
-        //this.rankedCollections.nativeElement.innerHTML += "<li style='Text-align:center;'>"+ "top ranked collection" +"</li>"  + "<button (click)='ShowImageCollection()'>"+ "see colleciton" + "</button>";
-      }
+       for (var i = 0; i < this.photoCollection.length ; i++){
+      $('#pictures').append("<li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;' >"
+      + "<img id="+i+" style='height:400px; width: 400px' src ='" 
+      + this.photoCollection[i] + "'></li>");
+      $("#"+i).click({img:$("#"+i).attr('src')}, this.imgClick); 
+    }
   }
  
  
@@ -53,4 +64,20 @@ export class HomeComponent implements OnInit {
      
        this.SetCollectionList();
   }
+  imgClick(event){
+    if(($('#wrap').children().length) > 0){
+      $('#selectedImg').attr('src', event.data.img); 
+      $('#myModal').css('display', 'block'); 
+    }
+  }
+  close(){
+    $('#myModal').css('display', 'none');
+  }
+  
+  addPic(){
+    console.log($('#wrap input[name=collection]:checked').val());
+    $('#myModal').css('display', 'none');
+    this._homeService.addtoCollection(localStorage.getItem('user'),  $('#selectedImg').attr('src'), $('#wrap input[name=collection]:checked').val()); 
+  }
+
 }

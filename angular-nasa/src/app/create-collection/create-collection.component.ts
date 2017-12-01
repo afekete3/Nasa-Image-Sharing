@@ -22,8 +22,8 @@ export class CreateCollectionComponent implements OnInit {
    */
   onCreateCollectionResponse(res: string) {
     if(res['message'] == 'collection created!'){
-      localStorage.setItem('editCollection', res['username'])
-      this.router.navigate(['editcollection']);
+    
+      this.router.navigate(['home']);
     }
     this.response = res['message'];
   }

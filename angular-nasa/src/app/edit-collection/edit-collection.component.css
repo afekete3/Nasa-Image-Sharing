@@ -124,3 +124,15 @@ input {
     position: relative;
     z-index: 9999;
 }
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}

@@ -1,4 +1,6 @@
-<head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"></head>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    </head>
 <br />
 <div class="inner contact">
                 <!-- Form Area -->
@@ -35,5 +37,13 @@
 
                 </div><!-- End Contact Form Area -->
             </div><!-- End Inner -->
-
+    <ol>
+        <li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;' *ngFor= "let x of imageCollection">
+            <div class='container'>
+           <img  style=' height:400px; width: 400px' src='{{x}}' > 
+           <div class='bottom-left'> <button (click)="deleteImage(x)"> Delete Image </button> </div> </div>
+        </li>
+    </ol>
+  
+   <br> <br>
 
