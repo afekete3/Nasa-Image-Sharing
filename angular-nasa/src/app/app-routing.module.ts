@@ -11,6 +11,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { EditCollectionComponent } from './edit-collection/edit-collection.component'
 import { MyCollectionsComponent } from './my-collections/my-collections.component'
+import { DashboardComponent } from './dashboard/dashboard.component'
  const routes: Routes = [
    { path: '', component : HomeComponent},
    { path: 'login', component: LoginComponent , canActivate:[LoginGuard]},
@@ -20,6 +21,7 @@ import { MyCollectionsComponent } from './my-collections/my-collections.componen
    { path: 'createcollection', component: CreateCollectionComponent, canActivate:[AuthGuard]},
    { path: 'editcollection', component: EditCollectionComponent},
    { path: 'mycollections', component: MyCollectionsComponent},
+   { path: 'dashboard', component: DashboardComponent},
 ];
 
 @NgModule({

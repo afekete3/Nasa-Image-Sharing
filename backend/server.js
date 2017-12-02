@@ -190,6 +190,29 @@ router.route('/addtocollection')
                 });
           });
     })
+router.route('/addLike')
+    .put(function(req,res){
+         Collection.find({'username':req.body.usernameCollection,'name': req.body.name }, function(err, collection){
+              var index = collection[0].rank.indexOf(req.body.usernameAccount);
+            if (index > -1) {
+                collection[0].rank.splice(index, 1);
+            }else{
+                 collection[0].rank.push(req.body.usernameAccount);
+            }
+            
+              collection[0].save(function() {
+                Collection.find(function(err, collections) {
+                    if (err){
+                        res.send(err);
+                    }   
+                    console.log(collections);
+                    res.json(collections);
+                });
+            
+            });
+         });
+       
+    });
 
 
 app.use('/api', router);

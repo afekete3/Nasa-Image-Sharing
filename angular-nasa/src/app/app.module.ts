@@ -18,6 +18,8 @@ import { EditCollectionComponent } from './edit-collection/edit-collection.compo
 import { EditCollectionService } from './services/edit-collection.service';
 import { MyCollectionsComponent } from './my-collections/my-collections.component'
 import { MyCollectionService } from './services/my-collection.service';
+import { DashboardService } from './services/dashboard.service'
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +30,14 @@ import { MyCollectionService } from './services/my-collection.service';
     CreateCollectionComponent,
     EditCollectionComponent,
     MyCollectionsComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService, AuthGuard, LoginGuard, EditCollectionService, MyCollectionService],
+  providers: [CreateAccountService, LoginService, HomeService, CreateCollectionService, AuthGuard, LoginGuard, EditCollectionService, MyCollectionService, DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
