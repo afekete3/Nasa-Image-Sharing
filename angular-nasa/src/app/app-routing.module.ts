@@ -12,6 +12,7 @@ import { LoginGuard } from './guards/login.guard';
 import { EditCollectionComponent } from './edit-collection/edit-collection.component'
 import { MyCollectionsComponent } from './my-collections/my-collections.component'
  const routes: Routes = [
+   { path: '', component : HomeComponent},
    { path: 'login', component: LoginComponent , canActivate:[LoginGuard]},
    { path: 'createaccount', component: CreateAccountComponent, canActivate:[LoginGuard]},
    { path: 'home', component: HomeComponent},

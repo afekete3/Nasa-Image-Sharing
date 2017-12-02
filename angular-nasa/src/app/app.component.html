@@ -1,6 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<h1 style="text-align:center;">NASA IMAGE SHARING SITE</h1>
-<router-outlet></router-outlet>
-
 <p style="display:none">user={{user}}</p>
-<a (click)="logout()" href='login'*ngIf=user>logout</a>
+ <header>
+      <h1>NASA IMAGE SHARING SITE</h1>
+      <h2>Anthony Fekete</h2>
+    </header>
+    <nav data-spy="affix" data-offset-top="160" data-offset-bottom="260">
+      <a href="home">Home</a>
+      <a href="mycollections">My Collections</a>
+      <a href="">Search</a>
+      <a (click)="logout()" href='login'*ngIf="user == true" >logout</a>
+       <a (click)="logout()" href='login'*ngIf="user == false" >login</a>
+     </nav>
+      <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+

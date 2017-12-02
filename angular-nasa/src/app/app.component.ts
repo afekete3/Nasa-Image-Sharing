@@ -9,6 +9,7 @@ export class AppComponent {
   title = 'app';
   user = localStorage.getItem('user') != null;
   logout(){
-    localStorage.removeItem('user');
+    localStorage.removeItem('user')
+    localStorage.removeItem('editCollection');
   }
 }

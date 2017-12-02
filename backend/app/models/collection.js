@@ -7,6 +7,7 @@ var CollectionSchema   = new Schema({
     desc: String,
     Collection: Array,
     ispublic: Boolean,
+    rank: Number,
     
 });
 

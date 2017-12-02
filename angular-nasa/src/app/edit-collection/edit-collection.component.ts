@@ -30,27 +30,12 @@ export class EditCollectionComponent implements OnInit {
       }
     //this.displayImages();
   }
-  displayImages(){
-  
- //   this.collectionImages.nativeElement.innerHTML = "";
-  //  console.log(this.imageCollection.length)
-    for (var i = 0; i < this.imageCollection.length ; i++){
-    /*    console.log('displaying images')
-        console.log(this.imageCollection[i]);
-       this.collectionImages.nativeElement.innerHTML +=
-       "<li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;'>"
-       + "<div class='container'>"
-       + "<img #'" + this.imageCollection[i] + "'style='height:400px; width: 400px' src ='" + this.imageCollection[i] 
-      + "'>  <div class='bottom-left'> <button (click)='this[action]()'> Delete Image </button> </div> </li>"; 
-      };*/
-    }
-  }
+ 
   deleteImage(link){
     console.log(link);
     this._editCollectionService.setImageCollectionData(this.onGetCollectionResponse.bind(this), link)
   }
   onGetCollectionResponse(res: string){
-    
     if (res[0]['Collection'] != null){
       console.log('has phtots in collection');
       this.setImages(res[0]['Collection']);
@@ -59,7 +44,7 @@ export class EditCollectionComponent implements OnInit {
    console.log(this.privacyCollection)
     this.descriptionCollection = res[0]['desc'];
   }
-  newPrivacy(value){
+  newPrivacy(){
      this.privacyCollection = ! this.privacyCollection ;
   }
 }

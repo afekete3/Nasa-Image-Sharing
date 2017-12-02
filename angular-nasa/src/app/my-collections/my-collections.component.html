@@ -1,8 +1,11 @@
+  <div class='container'>
  <h1 style="text-align: center;">Your Collections</h1>
- <ol>
-        <li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;' *ngFor= "let x of collection">
-            <div class='container'>
+ <ul class='container'>
+        <li style='float:left;padding: 1cm 1cm 1cm 1cm;' *ngFor= "let x of collection">
            <h3> {{x}}</h3>
-           <button (click)="displayCollection(x)"> Edit Collection </button>  </div>
+           <button (click)="displayCollection(x)"> Edit Collection </button>  
         </li>
-</ol>
+</ul>
+ 
+</div>
+ <a style="text-align: center;" href="createcollection">Create New Collection</a>

@@ -163,7 +163,6 @@ router.route('/collectionupdate')
             console.log(collection);
             collection[0].desc = req.body.description;
             collection[0].ispublic = req.body.privacy;
-            collection[0].Collection.push('https://images-assets.nasa.gov/image/PIA10556/PIA10556~thumb.jpg');
             collection[0].save(function() {
                 console.log(collection);
                 res.json(collection);
