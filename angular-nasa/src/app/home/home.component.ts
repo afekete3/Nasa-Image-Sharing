@@ -7,10 +7,14 @@ import * as $ from 'jquery';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  currentPage= 0;
+  numPages = 0;
+  pages = [[],[],[],[], [], []];
   response = '';
-  photoCollection = [];
+  photosCollection = [];
   collections = []; 
   isCollection = false; 
+  
   res = ''; 
 
   @ViewChild('rankedCollections') rankedCollections: ElementRef;
@@ -36,34 +40,39 @@ ngOnInit() {
    ShowImageCollection(){
     console.log('showing images');
   }
-  SetCollectionList(){
-     this.rankedCollections.nativeElement.innerHTML = "";
-       for (var i = 0; i < this.photoCollection.length ; i++){
-      $('#pictures').append("<li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;' >"
-      + "<img id="+i+" style='height:400px; width: 400px' src ='" 
-      + this.photoCollection[i] + "'></li>");
-      $("#"+i).click({img:$("#"+i).attr('src')}, this.imgClick); 
+ updatedPhotos(x){
+      this.rankedCollections.nativeElement.innerHTML = "";
+      for (var i = x; i<20+x && i < this.photosCollection.length ; i++){
+        $('#pictures').append("<li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;' >"
+        + "<img id="+i+" style='height:400px; width: 400px' src ='" 
+        + this.photosCollection[i] + "'></li>");
+        $("#"+i).click({img:$("#"+i).attr('src')}, this.imgClick); 
+
+      }
     }
-  }
- 
  
   searchImages(keyWord: string){
     this._homeService.getSearchData(this.onSearchResponse.bind(this), keyWord);
   }
   onSearchResponse(res: string){
-    this.photoCollection = new Array();
-      for(var i =0; i < res.length; i++){
-        if (res[i]['links'] != null){
-          if (res[i]['links'][0]['render'] == "image"){
-            console.log(res[i]['links'][0]['href'])
-            this.photoCollection.push(res[i]['links'][0]['href']);
+    this.photosCollection = new Array();
+           for(var i =0; i < res.length; i++){
+          if (res[i]['links'] != null){
+            if (res[i]['links'][0]['render'] == "image"){
+              this.photosCollection.push(res[i]['links'][0]['href']);
+            }
           }
+      
+      }
+      this.numPages= Math.floor(((this.photosCollection.length)/20));
+        if(this.photosCollection.length%20 !=0){
+          this.numPages++;
         }
+      console.log(this.numPages);
+      console.log(this.photosCollection.length)
+      this.updatedPhotos(0);
+      
     }
-    
-     
-       this.SetCollectionList();
-  }
   imgClick(event){
     if(($('#wrap').children().length) > 0){
       $('#selectedImg').attr('src', event.data.img); 
@@ -79,5 +88,21 @@ ngOnInit() {
     $('#myModal').css('display', 'none');
     this._homeService.addtoCollection(localStorage.getItem('user'),  $('#selectedImg').attr('src'), $('#wrap input[name=collection]:checked').val()); 
   }
+  pageUpClick(){
+      if (this.currentPage!= (this.numPages-1)){
+        this.currentPage++;
+        var startIndex= this.currentPage* 20;
+        this.updatedPhotos(startIndex);
+        console.log(startIndex);
+      }
+    }
+      pageDownClick(event){
+      if (this.currentPage!= 0){
+        this.currentPage--;
+        var startIndex= this.currentPage* 20;
+        this.updatedPhotos(startIndex);
+        console.log(startIndex);
+      }
+    }
 
 }

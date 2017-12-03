@@ -1,0 +1,33 @@
+
+<h3 style="text-align: center"> About Blurb</h3>
+<p style="text-align: center"> This website allows users the ability to make photo collections consisting NASA's photo gallary and choose whether or not to share them to the public.
+Below are the current top 10 ranked photo collections.</p>
+
+
+<h3 style="text-align: center"> TOP 10 RANKED COLLECTIONS</h3>
+
+<ol>
+    <li *ngFor= "let x of sortedCollection; let i = index">
+         <div class="card bg-light" style="max-width: 40rem; float:left; margin: 2px">
+             <div class="card-body">
+                <div class="card-content" style="display: inline-block">
+                       <h4> Collection Name:  {{x.name}} </h4>
+                        <h5>By: {{x.username}} </h5>
+                       <p> Rank: {{x.rank.length}} </p>
+                        <p>click image to see full collection </p>
+                    <img (click)="openPhotos(x.Collection)" src={{x.Collection[0]}}  style=' height:400px; width: 400px'> 
+                </div>
+           </div>
+       </div>
+    </li>
+</ol>
+<div id="myModal" class="moda">
+  <!-- Modal content -->
+  <div class="moda-content">
+    <span (click)="close()" class="close">&times;</span>
+     <button style="float: right" (click)='next()'>next</button>
+     
+    <img  id="selectedImg"> 
+   
+  </div>
+</div>

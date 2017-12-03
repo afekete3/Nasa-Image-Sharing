@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service'
+import * as $ from 'jquery';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,7 +8,8 @@ import { DashboardService } from '../services/dashboard.service'
 })
 export class DashboardComponent implements OnInit {
   collectionList = new Array();
-  isLiked: boolean = new Array();
+  imgCollection = []; 
+  isLiked= new Array();
   constructor(private _dashboardService: DashboardService) {
     this._dashboardService.getCollections(this.onGetAllCollectionsResponse.bind(this));
     
@@ -16,10 +18,12 @@ export class DashboardComponent implements OnInit {
   onGetAllCollectionsResponse(res: string){
     this.collectionList = new Array();
     for(var i = 0; i < res.length; i ++){
-      if(res[i]['ispublic'] == true){
-        if (res[i]['Collection'].length != 0){
-          console.log(res[i]['name'])
-          this.collectionList.push(res[i]);
+      if(res[i]['username'] != localStorage.getItem('user')){
+         if(res[i]['ispublic'] == true){
+          if (res[i]['Collection'].length != 0){
+            console.log(res[i]['name'])
+            this.collectionList.push(res[i]);
+          }
         }
       }
     }
@@ -35,16 +39,30 @@ export class DashboardComponent implements OnInit {
     }
     console.log(this.isLiked);
   }
-  openPhotos(){
-    console.log('opening images');
-  }
+
   checkLike(username,name, i){
     console.log(username, name, i);
-  
     this._dashboardService.setLike(this.onGetAllCollectionsResponse.bind(this), username, name);
-  
   }
   ngOnInit() {
   }
-
+  openPhotos(photos){
+    console.log(photos);
+    this.imgCollection = photos; 
+    $('#selectedImg').attr('src', photos[0]); 
+    $('#selectedImg').attr('value', 0); 
+    $('#myModal').css('display', 'block'); 
+  }
+  
+  close(){
+    $('#myModal').css('display', 'none');
+    this.imgCollection = []; 
+  }
+  next(){
+    console.log(this.imgCollection); 
+    var index = (parseInt($('#selectedImg').attr('value')) + 1)% this.imgCollection.length; 
+    $('#selectedImg').attr('src', this.imgCollection[index]); 
+    $('#selectedImg').attr('value', index); 
+  
+  }
 }

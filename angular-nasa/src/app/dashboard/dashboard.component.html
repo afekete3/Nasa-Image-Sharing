@@ -1,15 +1,30 @@
  
 
 <ul>
-    <li class = "container" *ngFor= "let x of collectionList; let i = index">
-     
-       <p style="float: right"> Like <input style="float: right" (change)="checkLike(x.username,x.name, i)"  [checked] = "isLiked[i]" type="checkbox" id="checkbox" /> </p>
-        <ul>
-            <li>Collection Name: {{x.name}} </li> 
-            <li>By: {{x.username}} </li>
-            <li>Rank: {{x.rank.length}}</li>
-            <li><img (click)="openPhotos()" src={{x.Collection[0]}}  style=' height:400px; width: 400px'> </li>
-        </ul>
-       <br> <br>
+    <li  *ngFor= "let x of collectionList; let i = index">
+     <div class="card bg-light" style="max-width: 40rem; float:left; margin: 2px">
+             <div class="card-body">
+               <div class="like-button">  
+                   <p> Like <input  (change)="checkLike(x.username,x.name, i)"  [checked] = "isLiked[i]" type="checkbox" id="checkbox" /> </p>
+               </div>
+       
+            <div class="card-content" style="display: inline-block">
+               <h4> Collection Name:  {{x.name}} </h4>
+                <h5>By: {{x.username}} </h5>
+               <p> Rank: {{x.rank.length}} </p>
+                <p>click image to see full collection </p>
+                <img (click)="openPhotos(x.Collection)" src={{x.Collection[0]}}  style=' height:400px; width: 400px'> 
+            </div>
+        </div>
+        </div>
+
     </li>
 </ul>
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span (click)="close()" class="close">&times;</span>
+    <img style="height: 300px; width:300px" id="selectedImg"> 
+    <button (click)='next()'>next</button>
+  </div>
+</div>

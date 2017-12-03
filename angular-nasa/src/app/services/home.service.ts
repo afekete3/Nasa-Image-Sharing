@@ -18,7 +18,7 @@ export class HomeService {
      }
   }
 addtoCollection(username, img, collectionName){
-     this.http.post('/api/addtocollection', { 'user' : username, 'img' : img, 'name' : collectionName}).subscribe(data=>{
+     this.http.post('/api/collectionupdate', { 'user' : username, 'img' : img, 'name' : collectionName}).subscribe(data=>{
         console.log(data); 
      })
  }

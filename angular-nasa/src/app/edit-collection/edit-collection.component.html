@@ -36,11 +36,11 @@
                         <div class="clear"></div>
 
                 </div><!-- End Contact Form Area -->
-                 <ol>
+                 <ol style=" list-style: none ">
                     <li style='float:left;padding: 0.5cm 0.25cm 0.5cm 0.25cm;' *ngFor= "let x of imageCollection">
-                        <div class='container'>
+                       
                        <img  style=' height:400px; width: 400px' src='{{x}}' > 
-                       <div class='bottom-left'> <button class="form-btn semibold" (click)="deleteImage(x)"> Delete Image </button> </div> </div>
+                       <div > <button  class=" form-btn"(click)="deleteImage(x)"> Delete Image </button> </div> 
                     </li>
                 </ol>
             </div><!-- End Inner -->

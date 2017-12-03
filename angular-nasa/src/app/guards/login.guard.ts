@@ -12,7 +12,7 @@ export class LoginGuard implements CanActivate {
             return true;
         }
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
         return false;
     }
     

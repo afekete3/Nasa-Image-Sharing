@@ -5,23 +5,30 @@ import { CreateAccountComponent } from './accounts/create-account/create-account
 import {CreateAccountService} from './services/create-account.service';
 import { LoginComponent } from './accounts/login/login.component';
 import { HomeComponent } from './home/home.component';
-import { AuthDashboardComponent } from './auth-dashboard/auth-dashboard.component';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
-import { EditCollectionComponent } from './edit-collection/edit-collection.component'
-import { MyCollectionsComponent } from './my-collections/my-collections.component'
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { AdminGuard } from './guards/admin.guard';
+import { EditCollectionComponent } from './edit-collection/edit-collection.component';
+import { MyCollectionsComponent } from './my-collections/my-collections.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UnauthDashboardComponent } from './unauth-dashboard/unauth-dashboard.component';
+import { VerifyComponent } from './verify/verify.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { PrivacyComponent } from './privacy/privacy.component';
  const routes: Routes = [
-   { path: '', component : HomeComponent},
+   { path: '', component : UnauthDashboardComponent, canActivate:[LoginGuard]},
    { path: 'login', component: LoginComponent , canActivate:[LoginGuard]},
    { path: 'createaccount', component: CreateAccountComponent, canActivate:[LoginGuard]},
-   { path: 'home', component: HomeComponent},
-   { path: 'authdashboard', component: AuthDashboardComponent, canActivate:[AuthGuard]},
+   { path: 'home', component: UnauthDashboardComponent},
    { path: 'createcollection', component: CreateCollectionComponent, canActivate:[AuthGuard]},
-   { path: 'editcollection', component: EditCollectionComponent},
-   { path: 'mycollections', component: MyCollectionsComponent},
-   { path: 'dashboard', component: DashboardComponent},
+   { path: 'editcollection', component: EditCollectionComponent, canActivate:[AuthGuard]},
+   { path: 'mycollections', component: MyCollectionsComponent, canActivate:[AuthGuard]},
+   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+   { path: 'searchimages', component: HomeComponent , canActivate:[AuthGuard]},
+   { path: 'verify' , component: VerifyComponent, canActivate:[LoginGuard]},
+   { path: 'adminhome', component: AdminHomeComponent, canActivate:[AdminGuard]},
+   { path: 'privacy' , component: PrivacyComponent},
 ];
 
 @NgModule({

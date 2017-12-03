@@ -11,4 +11,16 @@ export class MyCollectionService {
         callback_fun(data);
      }); 
  }
+ deleteCollection(callback_fun, id){
+         this.http.delete("/api/deletecollection/" + id ).subscribe(data=>{
+        console.log(data);
+        callback_fun(data);
+     }); 
+ }
+ updateCollectionName(callback_fun, newName, id){
+      this.http.put('/api/collectionname', { 'name' : newName, 'id': id, 'username': localStorage.getItem('user')}).subscribe(data=>{
+        console.log(data);
+        callback_fun(data);
+     }); 
+ }
 }

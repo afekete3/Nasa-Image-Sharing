@@ -23,7 +23,7 @@ export class CreateCollectionComponent implements OnInit {
   onCreateCollectionResponse(res: string) {
     if(res['message'] == 'collection created!'){
     
-      this.router.navigate(['home']);
+      this.router.navigate(['mycollections']);
     }
     this.response = res['message'];
   }

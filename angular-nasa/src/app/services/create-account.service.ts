@@ -13,11 +13,16 @@ export class CreateAccountService {
   getData(callback_fun,user, pass) {
     this.body['username'] = user;
     this.body['password'] = pass;
-    console.log(this.body['username'])
+    //console.log(this.body['username'])
       this.http.post('/api/create',this.body ).subscribe(data => {
           console.log(data);
           callback_fun(data['message']);
       });
+      
   }
-
+verifyEmail(callback, secretToken){
+     this.http.post('/api/verify', {'secretToken': secretToken}).subscribe(data=>{
+        callback(data['message']); 
+     });
+ }
 }

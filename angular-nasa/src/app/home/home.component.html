@@ -1,9 +1,10 @@
- <p style="text-align:center;"> The is a paragraph about the website</p>
-<h4 style="text-align:center;">Top rated photo collections</h4>
+ 
+<h4 style="text-align:center;">Search Nasa Images</h4>
 <p style="text-align:center"> Search imagmes by key word 
     <input #search>
     <button (click)="searchImages(search.value)">search</button> 
 </p>
+<button class="btn btn-outline-secondary"(click)="pageDownClick()" >Last </button><button class="btn btn-outline-secondary" (click)="pageUpClick()">Next</button>
 <ol id="pictures" #rankedCollections></ol>
 
 <div id="myModal" class="modal">

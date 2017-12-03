@@ -26,9 +26,15 @@ export class LoginComponent implements OnInit {
    * Therefore a callback function is required to get back the response.
    */
   onResponse(res: string) {
-    if (res['message'] == "valid password"){
+    if(res['message'] == "admin mode"){
+      localStorage.setItem('user', 'admin');
+       location.reload();
+       this.router.navigate(['adminhome']);
+      
+    } else if (res['message'] == "valid password"){
       localStorage.setItem('user', res['username'])
-      this.router.navigate(['createcollection']);
+      location.reload();
+      this.router.navigate(['mycollections']);
     }
     this.response = res['message'];
   }

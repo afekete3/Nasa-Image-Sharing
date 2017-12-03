@@ -1,11 +1,24 @@
+  <a href="createcollection">Create New Collection</a>
   <div class='container'>
  <h1 style="text-align: center;">Your Collections</h1>
  <ul class='container'>
         <li style='float:left;padding: 1cm 1cm 1cm 1cm;' *ngFor= "let x of collection">
-           <h3> {{x}}</h3>
-           <button (click)="displayCollection(x)"> Edit Collection </button>  
+           <h3> {{x.name}}</h3>
+           <button (click)="displayCollection(x.name)"> Edit Collection </button>  
+           <button (click)="changeNameCollection(x)"> Change Name of Collection </button> 
+           <button (click)="deleteCollection(x._id)"> Delete Collection</button> 
         </li>
 </ul>
  
 </div>
- <a style="text-align: center;" href="createcollection">Create New Collection</a>
+ <div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    
+   <label for="name">Name</label>
+                <input  id="collectionName"   #collectionName>
+    {{response}}
+    <button (click)="close()" class="close">Cancel</button>
+    <button (click)='save()' class="close">Save Name</button>
+  </div>
+</div>
