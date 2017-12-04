@@ -184,7 +184,7 @@ router.route('/createcollection')
                 collection.username = req.body.username;
                 collection.name = req.body.name;
                 collection.desc = req.body.description;
-                collection.ispublic = false;
+                collection.ispublic = req.body.privacy;
                 collection.save(function() {
                 console.log('saved account');
                 res.json({ message: 'collection created!', username: req.body.name });

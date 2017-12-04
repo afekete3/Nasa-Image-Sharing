@@ -18,5 +18,10 @@ export class DashboardService {
         callback_fun(data);
      })
     }
- 
+  deleteCollection(callback_fun, id){
+         this.http.delete("/api/deletecollection/" + id ).subscribe(data=>{
+        console.log(data);
+        callback_fun(data);
+     }); 
+ }
 }

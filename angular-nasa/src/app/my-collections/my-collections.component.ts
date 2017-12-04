@@ -17,11 +17,13 @@ export class MyCollectionsComponent implements OnInit {
 
   ngOnInit() {
   }
+  // call back function
   onGetCollectionResponse(res: string){
    if (res != null){
      this.setCollections(res);
    }
   }
+  // set collections
   setCollections(res){
     this.collection = new Array();
     for(var i = 0; i < res.length; i++){
@@ -31,16 +33,20 @@ export class MyCollectionsComponent implements OnInit {
       }
     }
   }
+  // displays collection
   displayCollection(name){
     localStorage.setItem('editCollection', name);
      this.router.navigate(['editcollection']);
   }
+  // deletes collection
   deleteCollection(id){
+     if (confirm('Are you sure you want to delete this collection')) {
      this._myCollectionService.deleteCollection(this.onGetCollectionResponse.bind(this), id);
+     }
   }
   changeNameCollection(account){
     this.response = "";
-     $('#collectionName').attr('value', account.name); 
+     $('#collectionName').val(account.name); 
      $('#collectionName').attr('name', account._id); 
       $('#myModal').css('display', 'block'); 
   }
@@ -48,10 +54,15 @@ export class MyCollectionsComponent implements OnInit {
     $('#myModal').css('display', 'none');
   }
   save(){
-    console.log( $('#collectionName').attr('name'))
-    console.log( $('#collectionName').val())
-      this._myCollectionService.updateCollectionName(this.onSaveResponse.bind(this), $('#collectionName').val(), $('#collectionName').attr('name')); 
+    if ($('#collectionName').val() == ""){
+      this.response = "can't have empty name! Please try again"
+    }else{
+      console.log( $('#collectionName').attr('name'))
+      console.log( $('#collectionName').val())
+        this._myCollectionService.updateCollectionName(this.onSaveResponse.bind(this), $('#collectionName').val(), $('#collectionName').attr('name'));
+    }
   }
+  // call back function
   onSaveResponse(res: string){
     if (res != null && res['message'] == null){
      this.setCollections(res);

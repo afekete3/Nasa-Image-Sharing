@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   // make it so the user collections dont show up
   onGetAllCollectionsResponse(res: string){
     this.collectionList = new Array();
+    // for loop pushes the collections to the array
     for(var i = 0; i < res.length; i ++){
       if(res[i]['username'] != localStorage.getItem('user')){
          if(res[i]['ispublic'] == true){
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
       }
     }
     this.isLiked = new Array();
+    // makes an array of boolean and check is the collection is already liked by user
     for(var  i = 0; i < this.collectionList.length; i++){
       console.log(i);
       if(this.collectionList[i]['rank'].indexOf(localStorage.getItem('user')) > -1){
@@ -39,13 +41,14 @@ export class DashboardComponent implements OnInit {
     }
     console.log(this.isLiked);
   }
-
+//gets called when the check box for like is changed
   checkLike(username,name, i){
     console.log(username, name, i);
     this._dashboardService.setLike(this.onGetAllCollectionsResponse.bind(this), username, name);
   }
   ngOnInit() {
   }
+  // sets up modal
   openPhotos(photos){
     console.log(photos);
     this.imgCollection = photos; 
@@ -53,11 +56,12 @@ export class DashboardComponent implements OnInit {
     $('#selectedImg').attr('value', 0); 
     $('#myModal').css('display', 'block'); 
   }
-  
+  // when exit button is click for modal
   close(){
     $('#myModal').css('display', 'none');
     this.imgCollection = []; 
   }
+  // diplays nexty photo in collection when clicked
   next(){
     console.log(this.imgCollection); 
     var index = (parseInt($('#selectedImg').attr('value')) + 1)% this.imgCollection.length; 

@@ -11,8 +11,14 @@
                 <input type="text" cols="40"   rows="5" style="width:200px; height:50px;" 
                 name="description"  #description>
 </div>
-<button (click)='createCollection(name.value,description.value)'>create collection</button>
-</div>
+    <h4>Privacy Options </h4>
+                                <input type = "radio" name ="Private" value="private" [checked]="this.privacyCollection == false" 
+                                 (change)='newPrivacy()' style="padding:0px 10px 0px 10px;" >Private
+                                <input type = "radio" name ="Public" value="public" [checked]="this.privacyCollection == true"  
+                                (change)='newPrivacy()' style="padding:0px 10px 0px 10px;">Public
+<br>
 <p>
   {{response}}
 </p>
+<button (click)='createCollection(name.value,description.value)'>create collection</button>
+</div>

@@ -18,9 +18,11 @@ export class EditCollectionComponent implements OnInit {
   }
    ngOnInit() {
   }
+// gets called when user clicks the save changes button
   updateCollection(description: string){
      this._editCollectionService.setCollectionData(this.onGetCollectionResponse.bind(this),description, this.privacyCollection)
   }
+  // sets all the images of the atrray
   setImages(images){
    this.imageCollection = new Array();
       for(var i =0; i < images.length; i++){
@@ -30,11 +32,12 @@ export class EditCollectionComponent implements OnInit {
       }
     //this.displayImages();
   }
- 
+ // gets called when the user deletes a photo. takes in the link of the photo
   deleteImage(link){
     console.log(link);
     this._editCollectionService.setImageCollectionData(this.onGetCollectionResponse.bind(this), link)
   }
+  // call back function getting all the info for the collection 
   onGetCollectionResponse(res: string){
     if (res[0]['Collection'] != null){
       console.log('has phtots in collection');
@@ -44,6 +47,7 @@ export class EditCollectionComponent implements OnInit {
    console.log(this.privacyCollection)
     this.descriptionCollection = res[0]['desc'];
   }
+  // gets called when the privacy radio button change values
   newPrivacy(){
      this.privacyCollection = ! this.privacyCollection ;
   }

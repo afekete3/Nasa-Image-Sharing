@@ -11,9 +11,9 @@
       <a href="mycollections" *ngIf="user == true && admin == false"  >My Collections</a>
        <a href="dashboard" *ngIf="user == true  && admin == false" >Public Collections</a>
       <a href="searchimages" *ngIf="user == true  && admin == false" >Search Nasa Images</a>
-      <a (click)="logout()" href='login'*ngIf="user == true" >logout</a>
+      <a (click)="logout()" href='home'*ngIf="user == true" >logout</a>
        <a (click)="logout()" href='login'*ngIf="user == false  && admin == false" >login</a>
-       <a hraf="privacy" > Privacy Policy</a>
+       <a href="privacy" > Privacy Policy</a>
      </nav>
     
         <router-outlet></router-outlet>
